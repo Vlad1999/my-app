@@ -1,16 +1,29 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: path.join(__dirname, "src", "index.js"),
+    entry: path.join(__dirname, "src", "index.tsx"),
     output: {
         path: path.resolve(__dirname, "dist")
     },
+    resolve: {
+        modules: [__dirname, "src", "node_modules"],
+        extensions: ["*", ".js", ".jsx", ".tsx", ".ts"]
+    }, 
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "public", "index.html")
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.css'
+        })
+    ],
     module: {
         rules: [
             {
-                test: /\.?js$/,
+                test: /\.(js|ts)x?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
@@ -20,22 +33,20 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"]
+                test: /\.scss$/i,
+                exclude: /node_modules/,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
             },
             {
                 test: /\.(png|jp(e*)g|svg|gif)$/,
+                exclude: /node_modules/,
                 use: ['file-loader']
             },
             {
                 test: /\.svg$/,
+                exclude: /node_modules/,
                 use: ['@svgr/webpack'],
             },
         ]
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src", "index.html")
-        })
-    ]
+    }
 }
