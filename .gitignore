@@ -1,8 +1,47 @@
-# dependencies
+# Dependency directories
 /node_modules
 
-# production
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache files
+/.pnp
+.pnp.js
+
+# npm cache
+.npm
+
+# Build files
 /build
 
-# local env files
-.env*.local
+# Logs
+/logs
+
+# Editor files
+/.vscode
+/.idea
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Compiled files
+*.log
+*.bak
+*.cache
+*.zip
+*.tar.gz
+*.rar
+*.tgz
+*.map
+
+# User-specific files
+*.rs.user
+*.rs.WRITER.user
+*.suo
+*.user
+*.sln.docstates
